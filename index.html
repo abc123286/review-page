@@ -2,78 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Review Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: #FF8000;
-      margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .btn {
       display: flex;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    .card {
-      background: #000;
-      color: #fff;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    }
-
-    .card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1rem;
-    }
-
-    .card h1 {
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-      color: #ccc;
-    }
-
-    .link-button {
-      display: block;
-      background: #333;
+      gap: 10px;
+      background-color: #2d2d2d;
       color: white;
-      padding: 0.75rem 1rem;
-      margin: 0.5rem 0;
+      padding: 15px 25px;
       border: none;
-      border-radius: 0.75rem;
+      border-radius: 12px;
+      margin: 10px 0;
       text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
     }
 
-    .link-button:hover {
-      background: #555;
+    .btn:hover {
+      background-color: #444;
+    }
+
+    .btn i {
+      font-size: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://i.imgur.com/yW3G4AA.png" alt="Logo">
-    <h1>Review Our Shop!</h1>
-    <p>Your feedback means the world to us 💬</p>
 
-    <a class="link-button" href="https://g.page/r/CVnBFDgI9gATEB0/review" target="_blank">Review on Google</a>
-    <a class="link-button" href="https://www.xiaohongshu.com/" target="_blank">Post on Xiao Hong Shu</a>
-    <a class="link-button" href="https://www.instagram.com/" target="_blank">Tag us on Instagram</a>
-  </div>
+  <img src="https://i.imgur.com/6VBx3io.png" alt="Logo" class="avatar"/>
+  <h1>Review Hub</h1>
+  <p>Support us by sharing your experience!</p>
+
+  <a href="https://wa.me/?text=I%20had%20a%20great%20experience!" class="btn" target="_blank">
+    <i class="fab fa-whatsapp"></i> Share on WhatsApp
+  </a>
+
+  <a href="https://search.google.com/local/writereview?placeid=ChIJX3tG-5BCzDERKx9rprCLNSo" class="btn" target="_blank">
+    <i class="fab fa-google"></i> Share on Google Review
+  </a>
+
+  <a href="https://www.xiaohongshu.com/" class="btn" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Xiaohongshu_Logo.png" style="height: 20px;" alt="Xiaohongshu Logo"/>
+    Share on 小红书
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://shuyi1234.github.io/review-hub/" class="btn" target="_blank">
+    <i class="fab fa-facebook"></i> Share on Facebook
+  </a>
+
+  <a href="https://www.instagram.com/" class="btn" target="_blank">
+    <i class="fab fa-instagram"></i> Share on Instagram
+  </a>
+
 </body>
 </html>
