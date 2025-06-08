@@ -4,80 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Review Hub</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 50px 20px;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 30px;
     }
-
-    .avatar {
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
+    h1 {
       margin-bottom: 20px;
     }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background-color: #2d2d2d;
+    .button {
+      display: block;
+      width: 250px;
+      margin: 10px auto;
+      padding: 15px;
+      background: #4CAF50;
       color: white;
-      padding: 15px 25px;
       border: none;
-      border-radius: 12px;
-      margin: 10px 0;
-      text-decoration: none;
-      font-size: 18px;
-      transition: background-color 0.3s ease;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-
-    .btn:hover {
-      background-color: #444;
-    }
-
-    .btn i {
-      font-size: 20px;
+    .button:hover {
+      background: #45a049;
     }
   </style>
 </head>
 <body>
+  <h1>Share Your Review</h1>
 
-  <img src="https://i.imgur.com/6VBx3io.png" alt="Logo" class="avatar"/>
-  <h1>Review Hub</h1>
-  <p>Support us by sharing your experience!</p>
+  <button class="button" onclick="shareReview('google')">Share on Google Review</button>
+  <button class="button" onclick="shareReview('whatsapp')">Share on WhatsApp</button>
+  <button class="button" onclick="shareReview('xiaohongshu')">分享至小红书</button>
+  <button class="button" onclick="shareReview('facebook')">Share on Facebook</button>
+  <button class="button" onclick="shareReview('instagram')">Share on Instagram</button>
 
-  <a href="https://wa.me/?text=I%20had%20a%20great%20experience!" class="btn" target="_blank">
-    <i class="fab fa-whatsapp"></i> Share on WhatsApp
-  </a>
+  <p style="margin-top: 40px; font-size: 14px;">(Caption will be auto copied for you)</p>
 
-  <a href="https://search.google.com/local/writereview?placeid=ChIJX3tG-5BCzDERKx9rprCLNSo" class="btn" target="_blank">
-    <i class="fab fa-google"></i> Share on Google Review
-  </a>
+  <script>
+    async function fetchCaptions() {
+      const response = await fetch('https://opensheet.elk.sh/1mWXWWcxGLVSoMEyySryumLpsiP39Jlx07WHIP5mfsWw/Sheet1');
+      return await response.json();
+    }
 
-  <a href="https://www.xiaohongshu.com/" class="btn" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Xiaohongshu_Logo.png" style="height: 20px;" alt="Xiaohongshu Logo"/>
-    Share on 小红书
-  </a>
+    function getRandomCaption(captions, platform) {
+      const filtered = captions.filter(row => row.platform.toLowerCase() === platform.toLowerCase());
+      return filtered.length ? filtered[Math.floor(Math.random() * filtered.length)].caption : '';
+    }
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://shuyi1234.github.io/review-hub/" class="btn" target="_blank">
-    <i class="fab fa-facebook"></i> Share on Facebook
-  </a>
+    async function shareReview(platform) {
+      const captions = await fetchCaptions();
+      const caption = getRandomCaption(captions, platform);
 
-  <a href="https://www.instagram.com/" class="btn" target="_blank">
-    <i class="fab fa-instagram"></i> Share on Instagram
-  </a>
+      if (!caption) {
+        alert('No caption found for this platform.');
+        return;
+      }
 
+      await navigator.clipboard.writeText(caption);
+
+      let redirectUrl = '#';
+      switch (platform) {
+        case 'google':
+          redirectUrl = 'https://g.page/r/CcW6HHy2aQNtEBM/review'; // 🔁 Replace with your actual review URL
+          break;
+        case 'whatsapp':
+          redirectUrl = `https://wa.me/?text=${encodeURIComponent(caption)}`;
+          break;
+        case 'facebook':
+          redirectUrl = 'https://www.facebook.com/';
+          break;
+        case 'instagram':
+          redirectUrl = 'https://www.instagram.com/';
+          break;
+        case 'xiaohongshu':
+          redirectUrl = 'https://www.xiaohongshu.com/';
+          break;
+      }
+
+      window.location.href = redirectUrl;
+    }
+  </script>
 </body>
 </html>
